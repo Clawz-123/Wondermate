@@ -45,38 +45,6 @@
   ],
   "hotels": [
     {
-      "id": "1",
-      "name": "Hotel Yak & Yeti",
-      "price": 120,
-      "img": [
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv5jbv6wn68crhqdjm1b",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck"
-      ],
-      "rating": 5,
-      "freeCancellation": true,
-      "reserveNow": true,
-      "desc": "Hotel Yak & Yeti is a luxurious 5-star hotel located in the heart of Kathmandu, offering world-class amenities and exceptional service. Guests can indulge in the hotel's opulent accommodations, featuring elegantly appointed rooms and suites with modern amenities. The hotel boasts an array of dining options, from fine dining restaurants to casual cafes, catering to diverse culinary preferences. Additionally, it features a state-of-the-art fitness center, a rejuvenating spa, and a stunning outdoor pool, providing guests with ample opportunities for relaxation and rejuvenation."
-    },
-    {
-      "id": "2",
-      "name": "Hotel Annapurna",
-      "price": 100,
-      "img": [
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/zgpubhnmahhywx21t1j2",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck"
-      ],
-      "rating": 5,
-      "freeCancellation": true,
-      "reserveNow": true,
-      "desc": "Hotel Annapurna is a renowned 5-star hotel in Kathmandu, offering stunning views of the Himalayas and a range of luxurious amenities. Guests can enjoy the hotel's spacious and elegantly designed rooms, which provide a perfect blend of comfort and style. The hotel features multiple dining options, including a rooftop restaurant with panoramic views of the city and the majestic mountains. Additionally, guests can unwind at the hotel's spa, take a dip in the outdoor pool, or stay active at the well-equipped fitness center."
-    },
-    {
       "id": "3",
       "name": "Hotel Radisson",
       "price": 80,
@@ -223,19 +191,6 @@
       "desc": "Pokhara, known as the city of lakes and the gateway to the Himalayas, is one of Nepal's most scenic and popular destinations"
     },
     {
-      "id": "3",
-      "name": "Chitwan",
-      "price": 1200,
-      "img": [
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/oj9db5gown3zqrszaqdx",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck",
-        "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv04birzzoi11uqqtmck"
-      ],
-      "desc": "Chitwan National Park, Nepal's first national park, is home to rare flora and fauna including the one-horned rhino and Royal Bengal tiger"
-    },
-    {
       "id": "4",
       "name": "Lumbini",
       "price": 500,
@@ -293,7 +248,7 @@
   "reviews": [
     {
       "id": "1",
-      "hotelId": "1",
+      "hotelId": null,  
       "rating": 5,
       "comment": "Great place to stay",
       "user": "User name",
@@ -311,7 +266,7 @@
     },
     {
       "id": "3",
-      "hotelId": "2",
+      "hotelId": null,
       "rating": 5,
       "comment": "Great place to stay",
       "user": "User name",
@@ -320,7 +275,7 @@
     },
     {
       "id": "4",
-      "hotelId": "1",
+      "hotelId": null,
       "rating": 5,
       "comment": "Great place to stay",
       "user": "User name",
@@ -329,7 +284,7 @@
     },
     {
       "id": "5",
-      "hotelId": "1",
+      "hotelId": null,
       "rating": 5,
       "comment": "Great place to stay",
       "user": "User name",
@@ -338,7 +293,7 @@
     },
     {
       "id": "6",
-      "hotelId": "1",
+      "hotelId": null,
       "rating": 5,
       "comment": "Great place to stay",
       "user": "User name",
