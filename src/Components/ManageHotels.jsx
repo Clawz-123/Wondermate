@@ -154,7 +154,9 @@ const ManageHotels = () => {
     try {
       const response = await axios.get("http://localhost:5269/api/Hotel");
       console.log(response)
-      setHotelData(response.data);
+      // console.log("this is response.data",response.data)
+      // console.log(response.data.getHotelDTOs)  
+      setHotelData(response.data.getHotelDTOs);
     } catch (err) {
       console.log(err);
     }

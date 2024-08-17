@@ -1,83 +1,121 @@
-import boat from "../assets/undraw_signin.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "../validation/validation";
+import { signInSchema } from "../validation/validation";
+import axios from "axios";
+import SignInImage from "../assets/undraw_signin.svg";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Signin = () => {
+const SignIn = () => {
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signUpSchema),
+    resolver: yupResolver(signInSchema),
   });
+  const onSubmit = async (data) => {
+    try {
+      const responseData = await axios.post(
+        "http://localhost:5269/api/Auth/SignIn",
+        data
+      );
+      if (responseData.status === 200) {
+        const { token, expiresIn, role, id } = responseData.data.response; // Access nested 'response' object
+        console.log("Response Data:", responseData.data);
 
-  const onSubmit = (data) => {
-    console.log(data);
+          localStorage.setItem("token", token);
+          localStorage.setItem("expiresIn", expiresIn);
+          localStorage.setItem('role', role);
+          localStorage.setItem('id', id);
+
+        setUser({ role }); // Update user state with role
+
+        console.log("Role:", role); // Ensure this logs the correct role
+        console.log("Expires In:", expiresIn);
+        navigate(role === "Admin" ? "/dashboard" : "/user/home");
+      }
+    } catch (error) {
+      console.error("Login failed:", error.response?.data || error.message);
+    }
   };
 
   return (
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className="h-screen w-full flex justify-center items-center duration-300">
       <div
-        className="h-full w-full sm:h-[80%] sm:w-[80%] grid sm:grid-cols-2"
+        className="h-full w-full sm:h-[80%] sm:w-[80%] grid sm:grid-cols-2 duration-300"
         style={{ boxShadow: "20px 20px 20px #DEDEDE" }}
       >
-        <div className="flex flex-col justify-center text-center m-6">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-center font-bold text-3xl text-blue-500 mb-4">Sign In</h1>
-            <div className="mb-2 lg:mb-3">
-              <input
-                className="border-blue-500 outline-none border-[3px] p-2 rounded w-[90%]"
-                type="text"
-                placeholder="Username"
-                id="username"
-                name="username"
-                {...register("username")}
-              />
-              {errors.username && <p className="text-red-500 text-xs font-bold">{errors.username.message}</p>}
-            </div>
-            <div className="mb-2 lg:mb-3">
-              <input
-                className="border-blue-500 outline-none border-[3px] p-2 rounded w-[90%]"
-                type="password"
-                placeholder="Password"
-                name="password"
-                {...register("password")}
-              />
-              {errors.password && <p className="text-red-500 text-xs font-bold mt-1">{errors.password.message}</p>}
-            </div>
-            <div className="mt-2 ml-6 mb-2 lg:mb-3 flex items-start">
-              <input
-                className="border-blue-500 border-[3px] focus:border-blue-500 focus:outline-none h-4 w-4"
-                type="checkbox"
-                id="terms"
-                name="iAgree"
-              />
-              <label className="ml-2 text-blue-500" htmlFor="terms">
-                <span className="text-black">Remember me </span>
-              </label>
-            </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center gap-2 md:gap-4 lg:gap-6 justify-center pl-8 pr-8 sm:pl-12 sm:pr-12 duration-300"
+        >
+          <h1 className="text-blue-600 text-3xl md:text-4xl lg:text-5xl font-bold">
+            Sign In
+          </h1>
 
-            <button className="bg-blue-500 text-white w-[90%] h-10 rounded-lg">Sign In</button>
-            <div className="text-center">
-            <p className="lg:mb-32">
-              New Here? <a href="/signup" className="text-blue-500">Sign Up</a>
+          <div className="w-full">
+            <input
+              className="h-10 md:h-14 pl-4 w-full border-2 border-blue-600 rounded-md focus:border-blue-600"
+              type="text"
+              placeholder="Username"
+              name="username"
+              id="username"
+              {...register("username")}
+            />
+            <p className="text-xs lg:text-sm text-red-600 font-semibold pt-1">
+              {errors.username?.message}
             </p>
           </div>
-           
-          </form>
-        </div>
-        <div className="flex flex-col justify-center items-center">
-          <img className="h-[60%] lg:h-full w-[60%] lg:w-[80%]" src={boat} alt="Sign up illustration" />
-          <div className="text-center">
-            <p className="lg:mb-32">
-              Or sign in with ......
+
+          <div className="w-full">
+            <input
+              className="h-10 md:h-14 pl-4 w-full border-2 border-blue-600 rounded-md focus:border-blue-600"
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+              {...register("password")}
+            />
+            <p className="text-xs lg:text-sm text-red-600 font-semibold pt-1">
+              {errors.password?.message}
             </p>
           </div>
+
+          <div className="flex gap-2 justify-start w-full">
+            <input
+              type="checkbox"
+              name="condition"
+              id="condition"
+              {...register("remember")}
+            />
+            <p>Remember Me</p>
+          </div>
+
+          <button
+            type="submit"
+            className="h-10 md:h-14 w-full bg-blue-600 rounded-md text-white font-bold text-lg ease-in-out duration-300 hover:bg-blue-800"
+          >
+            Sign In
+          </button>
+
+          <p className="font-normal">
+            New Here?{" "}
+            <span className="text-blue-600">
+              <a href="/signup">Sign Up</a>
+            </span>
+          </p>
+        </form>
+
+        <div className="flex flex-col justify-start sm:justify-center items-center pl-8 pr-8 gap-2 md:gap-4 lg:gap-6 duration-300">
+          <img className="w-11/12" src={SignInImage} alt="Sign In Image" />
+          <p>Or sign in with .... ....</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Signin;
+export default SignIn;

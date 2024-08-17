@@ -2,6 +2,8 @@ import boat from "../assets/undraw_signup.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../validation/validation";
+import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const {
@@ -12,9 +14,28 @@ const Signup = () => {
     resolver: yupResolver(signUpSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:5269/api/User", data);
+
+      if (response.status === 200) {
+        console.log("User created successfully:", response.data);
+        alert("User created successfully!");
+        navigate("/signin");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error:", error.response.data);
+        alert(`Error: ${error.response.data}`);
+      } else {
+        console.error("Error during sign up:", error.message);
+        alert(`Error: ${error.message}`);
+      }
+    }
   };
+
 
   return (
     <div className="h-screen w-full flex justify-center items-center">
@@ -61,11 +82,31 @@ const Signup = () => {
                 className="border-blue-500 outline-none border-[3px] p-2 rounded w-[90%]"
                 type="password"
                 placeholder="Confirm Password"
-                name="cpassword"
-                {...register("cpassword")}
+                name="confirmPassword"
+                {...register("confirmPassword")}
               />
               {errors.cpassword && <p className="text-red-500 text-xs font-bold mt-1">{errors.cpassword.message}</p>}
             </div>
+
+            {/* Admin or user */}
+            <div className="w-full">
+              <select
+                className="border-blue-500 outline-none border-[3px] p-2 rounded w-[90%]"
+                name="role"
+                id="role"
+                {
+                ...register("role")
+                }
+                defaultValue="User"
+              >
+                <option value="User"> User</option>
+                <option value="Admin"> Admin</option>
+              </select>
+              <p className="text-xs lg:text-sm text-red-600  font-semibold pt-1">
+                {errors.role?.message}
+              </p>
+            </div>
+
             <button className="bg-blue-500 text-white w-[90%] h-10 rounded-lg">Sign Up</button>
             <div className="mt-4 mb-1 lg:mb-3">
               <input
@@ -89,6 +130,7 @@ const Signup = () => {
               Already a member? <a href="/signin" className="text-blue-500">Sign in</a>
             </p>
           </div>
+
         </div>
       </div>
     </div>

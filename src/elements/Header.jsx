@@ -18,6 +18,16 @@ const Header = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
   };
 
+  const HandleLogout = () => {
+
+    
+    localStorage.removeItem("token", token);
+        localStorage.removeItem("expiresIn", expiresIn);
+        localStorage.removeItem('role', role);
+        localStorage.removeItem('id', id);
+
+  }
+
   return (
     <div className="h-[10vh] w-full flex justify-between items-center p-2 relative">
       {/* Mobile Menu */}
@@ -100,7 +110,7 @@ const Header = () => {
             <Link
               to="/logout"
               className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-              onClick={toggleProfileMenu}
+              onClick={HandleLogout}
             >
               Logout
             </Link>
